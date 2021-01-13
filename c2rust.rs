@@ -69,25 +69,25 @@ impl CFunction{
 				label:   x.label,
 				vartype: vartable[x.vartype],
 			}
-			args = append(args, v)
+			args.push(args, v);
 		}
 		for _, s := range f.body {
-			env = s.UpdateEnv(env)
+			env = s.UpdateEnv(env);
 		}
-		body := []RWriter{}
+		let body = Vec<RWriter>
 		// decl block
 		for k, v := range env.vars {
 			fmt.Println(v.vartype)
-			rv := RVar{
+			let rv = RVar{
 				label:   k,
 				vartype: v.vartype,
 				mutable: v.mutable,
 			}
-			s := &RVarDecl{
+			let s = &RVarDecl{
 				rvar:        rv,
 				initializer: v.initializer,
 			}
-			body = append(body, s)
+			body.push(body, s);
 		}
 		// TODO: statements
 		return &RFunction{
